@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import './style.css';
 
 const todos = [
@@ -19,35 +18,34 @@ const todos = [
   },
 ];
 
-
 const parent = document.querySelector('.tasks');
 const insertTodos = () => {
   todos.forEach((todo) => {
-    const div = document.createElement('div')
-    
-    const icon = document.createElement('i')
+    const div = document.createElement('div');
+    const icon = document.createElement('i');
+    // eslint-disable-next-line no-unused-expressions
     todo.completed
-      ? icon.classList.add('fas', 'fa-check')
+      ? icon.classList.add('fas', 'fa-check-square')
       : icon.classList.add('far', 'fa-square');
 
-    const text = document.createElement('p')
-    text.innerHTML = todo.description
+    const text = document.createElement('p');
+    text.innerHTML = todo.description;
 
     const span = document.createElement('span');
     span.classList.add('fas', 'fa-bars');
 
-    div.classList.add('item')
+    div.classList.add('item');
     div.appendChild(icon);
     div.appendChild(text);
     div.appendChild(span);
-    div.style.order = todo.index
-    parent.appendChild(div)
+    div.style.order = todo.index;
+    parent.appendChild(div);
   });
 
-  const completeAll = document.createElement('button')
-  completeAll.classList.add('delete')
-  completeAll.innerText = 'Clear All Completed'
-  parent.appendChild(completeAll)
+  const completeAll = document.createElement('button');
+  completeAll.classList.add('delete');
+  completeAll.innerText = 'Clear All Completed';
+  parent.appendChild(completeAll);
 };
 
 insertTodos();

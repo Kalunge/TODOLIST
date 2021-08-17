@@ -1,0 +1,51 @@
+body {
+  background: lightgrey;
+  height: 100%;
+}
+
+.item {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 50%;
+  background-color: #fff;
+  margin-top: 0.4%;
+  margin-bottom: 0.4%;
+  font-family: sans-serif;
+}
+
+span {
+  margin: 0.9%;
+  padding: 0.9%;
+}
+
+i {
+  margin: 1%;
+  padding: 1%;
+}
+
+input {
+  width: 100%;
+  margin: 0;
+  padding: 2%;
+  font-style: italic;
+  order: -1;
+}
+
+.delete {
+  width: 50%;
+  padding: 2%;
+  order: 93899;
+}
+
+.orders {
+  order: -2;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20%;
+  margin-top: 5%;
+}

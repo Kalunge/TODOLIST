@@ -11,7 +11,7 @@ body {
   max-width: 50%;
   background-color: #fff;
   margin-top: 0.4%;
-  margin-bottom: 0.4%;
+  margin-bottom: 0.2%;
   font-family: sans-serif;
 }
 
@@ -39,13 +39,14 @@ input {
   order: 93899;
 }
 
-.orders {
-  order: -2;
-}
-
 .todo-list {
   display: flex;
   flex-direction: column;
   margin-left: 20%;
   margin-top: 5%;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
 }

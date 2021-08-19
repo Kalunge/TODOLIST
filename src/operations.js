@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment*/
+/* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment, no-restricted-syntax*/
 
 class Todo {
   constructor(description, completed = false, index) {
@@ -38,6 +38,9 @@ class Operations {
       ? JSON.parse(localStorage.getItem('todoList'))
       : [];
     const newTodos = oldTodos.filter((todo) => todo.description !== desc);
+    for (const [todo, index] of newTodos.entries()) {
+      e.target.parentElement.style.order = index;
+    }
     Operations.saveItemsToLocalStorage(newTodos);
     window.location.href = '/';
   }

@@ -10,13 +10,19 @@ class Todo {
 
 class Operations {
   static addTodo(todos, desc, completed) {
-    const todo = new Todo(desc, completed, todos.length);
+    const todo = new Todo(desc, completed, todos.length + 1);
     todos.push(todo);
   }
 
   static saveItemsToLocalStorage(items) {
     localStorage.setItem('todoList', JSON.stringify(items));
   }
+
+  // static updateIndex(tasks) {
+  //   tasks.forEach((task) => {
+  //     task.index = tasks.indexOf(task) + 1;
+  //   });
+  // }
 
   static editTask(e, parentElement, todo, todos) {
     const textInuput = document.createElement('input');
@@ -38,9 +44,9 @@ class Operations {
       ? JSON.parse(localStorage.getItem('todoList'))
       : [];
     const newTodos = oldTodos.filter((todo) => todo.description !== desc);
-    for (const [todo, index] of newTodos.entries()) {
-      e.target.parentElement.style.order = index;
-    }
+    newTodos.forEach((task) => {
+      task.index = newTodos.indexOf(task) + 1;
+    });
     Operations.saveItemsToLocalStorage(newTodos);
     window.location.href = '/';
   }

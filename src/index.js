@@ -1,5 +1,4 @@
 /* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment*/
-
 import './style.css';
 import toggleCompleted from './interactive.js';
 import Operations from './operations.js';

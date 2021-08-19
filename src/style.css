@@ -39,6 +39,15 @@ input {
   order: 93899;
 }
 
+.edit {
+  order: 92899;
+}
+
+.centered {
+  text-align: center;
+  margin-left: 30%;
+}
+
 .todo-list {
   display: flex;
   flex-direction: column;

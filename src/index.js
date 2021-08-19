@@ -1,23 +1,9 @@
+/* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment*/
 import './style.css';
 import toggleCompleted from './interactive.js';
+import Operations from './operations.js';
 
-let todos = [
-  {
-    description: 'Walk the Dog',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Dinner with family',
-    completed: true,
-    index: 2,
-  },
-  {
-    description: 'complete authentication in equipment application',
-    completed: false,
-    index: 3,
-  },
-];
+let todos = [];
 
 const saveItemsToLocalStorage = (items) => {
   localStorage.setItem('todoList', JSON.stringify(items));
@@ -30,10 +16,22 @@ const insertTodos = () => {
     const icon = document.createElement('i');
     icon.classList.add('task');
     const text = document.createElement('p');
-    text.innerHTML = todo.description;
 
-    const span = document.createElement('span');
-    span.classList.add('fas', 'fa-bars');
+    // Edit Task
+    text.addEventListener('click', (e) => {
+      Operations.editTask(e, text, todo, todos);
+    });
+
+    text.innerHTML = todo.description;
+    const materiaIcon = document.createElement('span');
+    materiaIcon.classList.add('fas', 'fa-trash-alt');
+
+    // Delete task
+    materiaIcon.addEventListener('click', (e) => {
+      Operations.deleteTask(e);
+    });
+
+    // ToggleCompleted
     if (todo.completed) {
       icon.classList.add('fas', 'fa-check-square');
       icon.addEventListener('click', (e) => {
@@ -51,15 +49,25 @@ const insertTodos = () => {
     div.classList.add('item');
     div.appendChild(icon);
     div.appendChild(text);
-    div.appendChild(span);
+    div.appendChild(materiaIcon);
     div.style.order = todo.index;
     parent.appendChild(div);
   });
 
+  // Dont show edit if no todos
+  const editArea = document.querySelector('.togglevisibility');
+  if (todos.length === 0) {
+    editArea.style.display = 'none';
+  }
+
+  // MCLEAR ALL COMPLETE
   const completeAll = document.createElement('button');
   completeAll.classList.add('delete');
   completeAll.innerText = 'Clear All Completed';
   parent.appendChild(completeAll);
+  completeAll.addEventListener('click', (e) => {
+    Operations.clearAllCompleted(e, todos);
+  });
 };
 
 const getItemsFromStorage = () => {
@@ -69,4 +77,10 @@ const getItemsFromStorage = () => {
   insertTodos();
 };
 
-window.onload = getItemsFromStorage();
+const input = document.querySelector('input');
+
+input.addEventListener('keyup', (e) => {
+  Operations.addNew(e, todos, input);
+});
+
+document.addEventListener('DOMContentLoaded', getItemsFromStorage());

@@ -54,7 +54,7 @@ describe('deleting a task', () => {
           completed: false,
           index: 0,
         },
-      ])
+      ]),
     );
   });
 });
@@ -78,7 +78,7 @@ describe('deleting a task', () => {
           completed: false,
           index: 0,
         },
-      ])
+      ]),
     );
   });
 
@@ -96,5 +96,5 @@ describe('deleting a task', () => {
     const newArr = Operations.deleteTask(todos, todos[0].description);
     expect(newArr[0]).toHaveProperty('index', 1);
     expect(newArr[0]).toHaveProperty('description', 'Old task');
-  })
+  });
 });

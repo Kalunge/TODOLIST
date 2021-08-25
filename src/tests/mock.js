@@ -72,4 +72,6 @@ const insertTodos = () => {
   });
 };
 
-export { LocalStorage, insertTodos, Store, something, input, window };
+export {
+  LocalStorage, insertTodos, Store, something, input, window,
+};

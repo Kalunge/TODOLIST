@@ -66,7 +66,6 @@ class Operations {
       Operations.addTodo(todos, input.value);
       Operations.saveItemsToLocalStorage(todos);
       input.value = '';
-      input.focus();
       window.location.href = '/';
     }
   }

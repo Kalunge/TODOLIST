@@ -58,3 +58,43 @@ describe('deleting a task', () => {
     );
   });
 });
+
+describe('deleting a task', () => {
+  const todos = [
+    { description: 'new Task', completed: false, index: 1 },
+    { description: 'Old task', completed: false, index: 2 },
+    { description: 'take out trash', completed: false, index: 3 },
+    { description: 'dinner with wife', completed: false, index: 4 },
+    { description: 'walk the dog', completed: false, index: 5 },
+  ];
+  it('deleting one', () => {
+    expect(Operations.deleteTask(todos, todos[0].description).length).toBe(4);
+  });
+  it(' deletes specific one', () => {
+    expect(Operations.deleteTask(todos, todos[0].description)).toEqual(
+      expect.not.arrayContaining([
+        {
+          description: 'new Task',
+          completed: false,
+          index: 0,
+        },
+      ])
+    );
+  });
+
+  it('rearrange indexes after deleting third item', () => {
+    const newArr = Operations.deleteTask(todos, todos[2].description);
+    expect(newArr).toEqual([
+      { description: 'new Task', completed: false, index: 1 },
+      { description: 'Old task', completed: false, index: 2 },
+      { description: 'dinner with wife', completed: false, index: 3 },
+      { description: 'walk the dog', completed: false, index: 4 },
+    ]);
+  });
+
+  it('rearrange indexes after deleting first item', () => {
+    const newArr = Operations.deleteTask(todos, todos[0].description);
+    expect(newArr[0]).toHaveProperty('index', 1);
+    expect(newArr[0]).toHaveProperty('description', 'Old task');
+  })
+});

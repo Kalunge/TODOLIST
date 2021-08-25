@@ -19,6 +19,7 @@ const insertTodos = () => {
 
     // Edit Task
     text.addEventListener('click', (e) => {
+      e.preventDefault();
       Operations.editTask(e, text, todo, todos);
     });
 
@@ -34,7 +35,7 @@ const insertTodos = () => {
         : [];
       const newTodos = Operations.deleteTask(oldTodos, desc);
       Operations.saveItemsToLocalStorage(newTodos);
-      window.location.href = '/';
+      window.location.href = './index.html';
     });
 
     // ToggleCompleted
@@ -94,7 +95,7 @@ input.addEventListener('keyup', (e) => {
     Operations.addTodo(todos, input.value);
     Store.storeItem(todos);
     input.value = '';
-    window.location.href = '/';
+    window.location.href = './index.html';
   }
 });
 

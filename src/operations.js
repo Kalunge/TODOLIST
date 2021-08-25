@@ -28,12 +28,6 @@ class Operations {
     localStorage.setItem('todoList', JSON.stringify(items));
   }
 
-  // static updateIndex(tasks) {
-  //   tasks.forEach((task) => {
-  //     task.index = tasks.indexOf(task) + 1;
-  //   });
-  // }
-
   static editTask(e, parentElement, todo, todos) {
     const textInuput = document.createElement('input');
     parentElement.appendChild(textInuput);
@@ -49,10 +43,6 @@ class Operations {
   }
 
   static deleteTask(oldTodos, desc) {
-    // const desc = e.target.parentElement.textContent;
-    // const oldTodos = localStorage.getItem('todoList')
-    //   ? JSON.parse(localStorage.getItem('todoList'))
-    //   : [];
     const newTodos = oldTodos.filter((todo) => todo.description !== desc);
     newTodos.forEach((task) => {
       task.index = newTodos.indexOf(task) + 1;
@@ -63,7 +53,7 @@ class Operations {
   static clearAllCompleted(e, todos) {
     todos = todos.filter((todo) => !todo.completed);
     Operations.saveItemsToLocalStorage(todos);
-    window.location.href = '/';
+    window.location.href = './index.html';
   }
 }
 

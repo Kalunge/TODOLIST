@@ -1,18 +1,48 @@
+/* eslint-disable max-classes-per-file, spaced-comment*/
 class LocalStorage {
   constructor() {
-    this.todos = [];
+    this.store = {
+      todos: [],
+    };
   }
 
-  static getItem(key) {
+  getItem(key) {
     return this.store[key];
   }
 
-  static setItem(key, item) {
+  setItem(key, item) {
     this.store[key] = item;
   }
 }
 
-const todos = LocalStorage.getItem('todos');
+const something = {
+  key: 'Enter',
+  preventDefault: () => '',
+};
+
+const localStorage = new LocalStorage();
+const todos = localStorage.getItem('todos');
+
+class Store {
+  static getItems() {
+    return JSON.stringify(localStorage.getItem('todos'));
+  }
+
+  static storeItem(items) {
+    // localStorage.clear('items');
+    localStorage.setItem('todos', JSON.stringify(items));
+  }
+}
+
+const input = {
+  value: 'ruben',
+};
+
+const window = {
+  location: {
+    href: '',
+  },
+};
 
 const insertTodos = () => {
   todos.forEach((todo) => {
@@ -42,4 +72,4 @@ const insertTodos = () => {
   });
 };
 
-export { LocalStorage, insertTodos };
+export { LocalStorage, insertTodos, Store, something, input, window };

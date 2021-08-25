@@ -1,5 +1,15 @@
 /* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment, no-restricted-syntax*/
 
+class Store {
+  static getItems() {
+    return localStorage.getItem('todoList');
+  }
+
+  static storeItem(items) {
+    // localStorage.clear('items');
+    localStorage.setItem('todoList', JSON.stringify(items));
+  }
+}
 class Todo {
   constructor(description, completed = false, index) {
     this.description = description;
@@ -38,17 +48,16 @@ class Operations {
     });
   }
 
-  static deleteTask(e) {
-    const desc = e.target.parentElement.textContent;
-    const oldTodos = localStorage.getItem('todoList')
-      ? JSON.parse(localStorage.getItem('todoList'))
-      : [];
+  static deleteTask(oldTodos, desc) {
+    // const desc = e.target.parentElement.textContent;
+    // const oldTodos = localStorage.getItem('todoList')
+    //   ? JSON.parse(localStorage.getItem('todoList'))
+    //   : [];
     const newTodos = oldTodos.filter((todo) => todo.description !== desc);
     newTodos.forEach((task) => {
       task.index = newTodos.indexOf(task) + 1;
     });
-    Operations.saveItemsToLocalStorage(newTodos);
-    window.location.href = '/';
+    return newTodos;
   }
 
   static clearAllCompleted(e, todos) {
@@ -56,19 +65,6 @@ class Operations {
     Operations.saveItemsToLocalStorage(todos);
     window.location.href = '/';
   }
-
-  static addNew(e, todos, input) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      todos = localStorage.getItem('todoList')
-        ? JSON.parse(localStorage.getItem('todoList'))
-        : [];
-      Operations.addTodo(todos, input.value);
-      Operations.saveItemsToLocalStorage(todos);
-      input.value = '';
-      window.location.href = '/';
-    }
-  }
 }
 
-export default Operations;
+export { Operations, Store };

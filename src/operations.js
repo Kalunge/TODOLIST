@@ -6,7 +6,6 @@ class Store {
   }
 
   static storeItem(items) {
-    // localStorage.clear('items');
     localStorage.setItem('todoList', JSON.stringify(items));
   }
 }

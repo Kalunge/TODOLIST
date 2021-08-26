@@ -54,7 +54,7 @@ describe('deleting a task', () => {
           completed: false,
           index: 0,
         },
-      ]),
+      ])
     );
   });
 });
@@ -78,7 +78,7 @@ describe('deleting a task', () => {
           completed: false,
           index: 0,
         },
-      ]),
+      ])
     );
   });
 
@@ -109,7 +109,11 @@ describe('Editing a task', () => {
 
   it('Changes description from "walk the dog" to "walk alone"', () => {
     Operations.editTask(todo, 'walk alone');
-    expect(todo).toEqual({ description: 'walk alone', completed: false, index: 4 });
+    expect(todo).toEqual({
+      description: 'walk alone',
+      completed: false,
+      index: 4,
+    });
   });
 });
 
@@ -149,6 +153,34 @@ describe('Toggle Completed', () => {
       { description: 'Old task', completed: true, index: 2 },
       { description: 'take out trash', completed: false, index: 3 },
       { description: 'dinner with wife', completed: true, index: 4 },
+      { description: 'walk the dog', completed: true, index: 5 },
+    ]);
+  });
+});
+
+describe('clear all completed', () => {
+  let myTasks = [
+    { description: 'new Task', completed: false, index: 1 },
+    { description: 'Old task', completed: false, index: 2 },
+    { description: 'take out trash', completed: true, index: 3 },
+    { description: 'dinner with wife', completed: true, index: 4 },
+    { description: 'walk the dog', completed: false, index: 5 },
+  ];
+
+  it('array to contain only nonCompleted tasks', () => {
+    myTasks = Operations.clearAllCompleted(myTasks);
+    expect(myTasks).toEqual([
+      { description: 'new Task', completed: false, index: 1 },
+      { description: 'Old task', completed: false, index: 2 },
+      { description: 'walk the dog', completed: false, index: 5 },
+    ]);
+  });
+
+  it('not equal to array containing completed tasks', () => {
+    myTasks = Operations.clearAllCompleted(myTasks);
+    expect(myTasks).not.toEqual([
+      { description: 'new Task', completed: true, index: 1 },
+      { description: 'Old task', completed: false, index: 2 },
       { description: 'walk the dog', completed: true, index: 5 },
     ]);
   });

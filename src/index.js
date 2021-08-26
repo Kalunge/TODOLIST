@@ -99,7 +99,8 @@ const insertTodos = () => {
   completeAll.innerText = 'Clear All Completed';
   parent.appendChild(completeAll);
   completeAll.addEventListener('click', (e) => {
-    Operations.clearAllCompleted(e, todos);
+    Operations.saveItemsToLocalStorage(Operations.clearAllCompleted(todos));
+    window.location.href = './index.html';
   });
 };
 

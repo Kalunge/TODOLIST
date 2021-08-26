@@ -40,10 +40,9 @@ class Operations {
     return newTodos;
   }
 
-  static clearAllCompleted(e, todos) {
+  static clearAllCompleted(todos) {
     todos = todos.filter((todo) => !todo.completed);
-    Operations.saveItemsToLocalStorage(todos);
-    window.location.href = './index.html';
+    return todos;
   }
 }
 

@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment*/
 import './style.css';
 import toggleCompleted from './interactive.js';
-import Operations from './operations.js';
+import { Store, Operations } from './operations.js';
 
 let todos = [];
 
@@ -19,6 +19,7 @@ const insertTodos = () => {
 
     // Edit Task
     text.addEventListener('click', (e) => {
+      e.preventDefault();
       Operations.editTask(e, text, todo, todos);
     });
 
@@ -28,7 +29,13 @@ const insertTodos = () => {
 
     // Delete task
     materiaIcon.addEventListener('click', (e) => {
-      Operations.deleteTask(e);
+      const desc = e.target.parentElement.textContent;
+      const oldTodos = localStorage.getItem('todoList')
+        ? JSON.parse(localStorage.getItem('todoList'))
+        : [];
+      const newTodos = Operations.deleteTask(oldTodos, desc);
+      Operations.saveItemsToLocalStorage(newTodos);
+      window.location.href = './index.html';
     });
 
     // ToggleCompleted
@@ -80,7 +87,16 @@ const getItemsFromStorage = () => {
 const input = document.querySelector('input');
 
 input.addEventListener('keyup', (e) => {
-  Operations.addNew(e, todos, input);
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const todos = localStorage.getItem('todoList')
+      ? JSON.parse(localStorage.getItem('todoList'))
+      : [];
+    Operations.addTodo(todos, input.value);
+    Store.storeItem(todos);
+    input.value = '';
+    window.location.href = './index.html';
+  }
 });
 
 document.addEventListener('DOMContentLoaded', getItemsFromStorage());

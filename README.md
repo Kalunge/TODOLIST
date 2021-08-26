@@ -22,10 +22,6 @@ To get a local copy up and running follow these simple example steps.
 - Node.js
 - npm
 
-### Live Demo
-[live](https://kalunge.github.io/TODOLIST/)
-
-### Setup
 
 Clone the repository with:
 
@@ -45,6 +41,22 @@ npm run build
 
 npm start
 ```
+## live Demo
+[live](https://kalunge.github.io/TODOLIST/)
+
+
+
+## Test
+
+- After cloning the project you need to run this command
+
+  > `npm install`
+  > This command will download all the dependancies including jest
+
+- run this command for testing:
+
+  > `npm run test`
+
 ## Author
 
 👤 **Kalunge**

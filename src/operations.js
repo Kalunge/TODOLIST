@@ -1,5 +1,15 @@
 /* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment, no-restricted-syntax*/
 
+class Store {
+  static getItems() {
+    return localStorage.getItem('todoList');
+  }
+
+  static storeItem(items) {
+    // localStorage.clear('items');
+    localStorage.setItem('todoList', JSON.stringify(items));
+  }
+}
 class Todo {
   constructor(description, completed = false, index) {
     this.description = description;
@@ -18,12 +28,6 @@ class Operations {
     localStorage.setItem('todoList', JSON.stringify(items));
   }
 
-  // static updateIndex(tasks) {
-  //   tasks.forEach((task) => {
-  //     task.index = tasks.indexOf(task) + 1;
-  //   });
-  // }
-
   static editTask(e, parentElement, todo, todos) {
     const textInuput = document.createElement('input');
     parentElement.appendChild(textInuput);
@@ -38,38 +42,19 @@ class Operations {
     });
   }
 
-  static deleteTask(e) {
-    const desc = e.target.parentElement.textContent;
-    const oldTodos = localStorage.getItem('todoList')
-      ? JSON.parse(localStorage.getItem('todoList'))
-      : [];
+  static deleteTask(oldTodos, desc) {
     const newTodos = oldTodos.filter((todo) => todo.description !== desc);
     newTodos.forEach((task) => {
       task.index = newTodos.indexOf(task) + 1;
     });
-    Operations.saveItemsToLocalStorage(newTodos);
-    window.location.href = '/';
+    return newTodos;
   }
 
   static clearAllCompleted(e, todos) {
     todos = todos.filter((todo) => !todo.completed);
     Operations.saveItemsToLocalStorage(todos);
-    window.location.href = '/';
-  }
-
-  static addNew(e, todos, input) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      todos = localStorage.getItem('todoList')
-        ? JSON.parse(localStorage.getItem('todoList'))
-        : [];
-      Operations.addTodo(todos, input.value);
-      Operations.saveItemsToLocalStorage(todos);
-      input.value = '';
-      input.focus();
-      window.location.href = '/';
-    }
+    window.location.href = './index.html';
   }
 }
 
-export default Operations;
+export { Operations, Store };

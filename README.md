@@ -42,7 +42,7 @@ npm run build
 npm start
 ```
 ## live Demo
-[](https://kalunge.github.io/TODOLIST/)
+[live](https://kalunge.github.io/TODOLIST/)
 
 
 

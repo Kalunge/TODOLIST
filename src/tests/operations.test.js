@@ -54,7 +54,7 @@ describe('deleting a task', () => {
           completed: false,
           index: 0,
         },
-      ])
+      ]),
     );
   });
 });
@@ -78,7 +78,7 @@ describe('deleting a task', () => {
           completed: false,
           index: 0,
         },
-      ])
+      ]),
     );
   });
 

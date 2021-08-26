@@ -6,7 +6,6 @@ class Store {
   }
 
   static storeItem(items) {
-    // localStorage.clear('items');
     localStorage.setItem('todoList', JSON.stringify(items));
   }
 }
@@ -28,18 +27,8 @@ class Operations {
     localStorage.setItem('todoList', JSON.stringify(items));
   }
 
-  static editTask(e, parentElement, todo, todos) {
-    const textInuput = document.createElement('input');
-    parentElement.appendChild(textInuput);
-    textInuput.focus();
-    textInuput.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        parentElement.removeChild(textInuput);
-        parentElement.innerHTML = textInuput.value;
-        todo.description = textInuput.value;
-        Operations.saveItemsToLocalStorage(todos);
-      }
-    });
+  static editTask(todo, value) {
+    todo.description = value;
   }
 
   static deleteTask(oldTodos, desc) {
@@ -50,11 +39,14 @@ class Operations {
     return newTodos;
   }
 
-  static clearAllCompleted(e, todos) {
+  static clearAllCompleted(todos) {
     todos = todos.filter((todo) => !todo.completed);
-    Operations.saveItemsToLocalStorage(todos);
-    window.location.href = './index.html';
+    return todos;
   }
 }
 
-export { Operations, Store };
+const toggleCompleted = (task) => {
+  task.completed = !task.completed;
+};
+
+export { Operations, Store, toggleCompleted };

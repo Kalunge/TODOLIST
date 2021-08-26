@@ -1,7 +1,6 @@
 /* eslint-disable max-classes-per-file, no-unused-vars, spaced-comment*/
 import './style.css';
-import toggleCompleted from './interactive.js';
-import { Store, Operations } from './operations.js';
+import { Store, Operations, toggleCompleted } from './operations.js';
 
 let todos = [];
 
@@ -16,11 +15,24 @@ const insertTodos = () => {
     const icon = document.createElement('i');
     icon.classList.add('task');
     const text = document.createElement('p');
+    text.classList.add('origin');
 
     // Edit Task
     text.addEventListener('click', (e) => {
-      e.preventDefault();
-      Operations.editTask(e, text, todo, todos);
+      let counter = 0;
+      if (text.classList.contains('origin')) {
+        const textInuput = document.createElement('input');
+        text.parentElement.appendChild(textInuput);
+        textInuput.focus();
+        textInuput.addEventListener('blur', (e) => {
+          text.parentElement.removeChild(textInuput);
+          text.innerHTML = textInuput.value;
+          todo.description = textInuput.value;
+          Operations.editTask(todo, textInuput.value);
+          Operations.saveItemsToLocalStorage(todos);
+        });
+      }
+      counter += 1;
     });
 
     text.innerHTML = todo.description;
@@ -42,14 +54,28 @@ const insertTodos = () => {
     if (todo.completed) {
       icon.classList.add('fas', 'fa-check-square');
       icon.addEventListener('click', (e) => {
-        toggleCompleted(e, todo);
-        saveItemsToLocalStorage(todos);
+        if (e.target.classList.contains('fas')) {
+          e.target.classList.value = 'task far fa-square';
+          toggleCompleted(todo);
+          saveItemsToLocalStorage(todos);
+        } else {
+          e.target.classList.value = 'task fas fa-check-square';
+          toggleCompleted(todo);
+          saveItemsToLocalStorage(todos);
+        }
       });
     } else {
       icon.classList.add('far', 'fa-square');
       icon.addEventListener('click', (e) => {
-        toggleCompleted(e, todo);
-        saveItemsToLocalStorage(todos);
+        if (e.target.classList.contains('fas')) {
+          e.target.classList.value = 'task far fa-square';
+          toggleCompleted(todo);
+          saveItemsToLocalStorage(todos);
+        } else {
+          e.target.classList.value = 'task fas fa-check-square';
+          toggleCompleted(todo);
+          saveItemsToLocalStorage(todos);
+        }
       });
     }
 

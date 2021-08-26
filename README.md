@@ -23,7 +23,7 @@ To get a local copy up and running follow these simple example steps.
 - npm
 
 ### Live Demo
-[linkk](https://kalunge.github.io/TODOLIST/)
+[link](https://kalunge.github.io/TODOLIST/)
 ### Setup
 
 Clone the repository with:
